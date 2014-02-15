@@ -6,3 +6,13 @@ var products = [
 	{id:90,name:'ten',cost:310,units:20,category:2},
 	{id:40,name:'zen',cost:160,units:21,category:1}
 ]
+
+function sort(list){
+	/*
+		implement the sort logic for sorting the list based on "id" (assuming that all the objects in the list have "id" attribute)
+	*/
+}
+
+/*
+	Modify the above sort function in such way that the user can sort the list based on ANY attribute
+*/
