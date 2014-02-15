@@ -50,4 +50,23 @@ function sort(list,attrName){
 
 function filter(list,criteria){
 	//you decide what should be the implementation of criteria
+	var result = [];
+	for(var i=0;i<list.length;i++)
+		if (criteria(list[i])) result.push(list[i]);
+	return result;
+}
+
+function filter(list,criteria,intResult){
+	if (list.length === 0) return intResult;
+	if (criteria(list[0])) intResult.push(list[0]);
+	return filter.call(this,[].slice.call(list,1),criteria, intResult);
+}
+
+function groupBy(list,iterator,intResult){
+	intResult = intResult || {};
+	if (list.length === 0) return intResult;
+	var key = iterator(list[0]);
+	if (!intResult[key]) intResult[key] = [];
+	intResult[key].push(list[0]);
+	return groupBy.call(this,[].slice.call(list,1),iterator, intResult);
 }
