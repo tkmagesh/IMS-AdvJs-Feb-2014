@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Salary Calculator</title>
+	<script src="SalaryCalculator.js"></script>
+	<script>
+	
+	
+	
+
+	(function(){
+		var txtBasic, txtHra, txtDa, rangeTax, spanTax, btnCalculate;
+		var calculator;
+		
+		window.addEventListener("DOMContentLoaded",init);
+
+		function init(){
+			calculator = new SalaryCalculator();
+			calculator.onSalaryChange = updateSalary;
+
+			btnCalculate = document.getElementById("btnCalculate");
+			
+			txtBasic = document.getElementById("txtBasic");
+			txtBasic.addEventListener("change",onTxtBasicChange);
+			
+			txtHra = document.getElementById("txtHra");
+			txtHra.addEventListener("change",onTxtHraChange);
+
+			txtDa = document.getElementById("txtDa");
+			txtDa.addEventListener("change",onTxtDaChange);
+
+			rangeTax = document.getElementById("rangeTax");
+			rangeTax.addEventListener("change",onRangeTaxChange);
+
+			spanTax = document.getElementById("spanTax");
+
+			btnCalculate.addEventListener("click",onBtnCalculateClick);
+			rangeTax.addEventListener("change",onRangeTaxChange);
+		}
+		
+		function onTxtBasicChange(){
+			calculator.basic = parseInt(this.value);
+		}
+
+		function onTxtHraChange(){
+			calculator.hra = parseInt(this.value);
+		}
+		function onTxtDaChange(){
+			calculator.da = parseInt(this.value);
+		}
+		function onRangeTaxChange(){
+			calculator.tax = parseInt(this.value);
+			spanTax.innerText = "[" + rangeTax.value + "]";
+		}
+
+		function updateSalary(){
+			divSalary.innerText = calculator.salary;
+		}
+
+		function onBtnCalculateClick(){
+			calculator.calculate();
+		}
+
+	})();
+
+	</script>
+</head>
+<body>
+	<h1>Salary Calculator</h1>
+	<div>
+		<div>Basic :</div>
+		<input type="text" name="" id="txtBasic">
+	</div>
+	<div>
+		<div>HRA :</div>
+		<input type="text" name="" id="txtHra">
+	</div>
+	<div>
+		<div>DA :</div>
+		<input type="text" name="" id="txtDa">
+	</div>
+	<div>
+		<div>Tax :</div>
+		<input type="range" name="" id="rangeTax" min="0" max="50" value="0">
+		<span id="spanTax">[Tax]</span>
+	</div>
+	<div><input type="button" value="Calculate" id="btnCalculate"></div>
+	<div>
+		<div id="divSalary"></div>
+	</div>
+</body>
+</html>
