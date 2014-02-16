@@ -17,7 +17,9 @@
 
 		function init(){
 			calculator = new SalaryCalculator();
-			calculator.onSalaryChange = updateSalary;
+			//calculator.onSalaryChange = updateSalary;
+			calculator.addSubscriberForSalaryChange(updateSalary);
+			calculator.addSubscriberForSalaryChange(notifySalaryChange);
 
 			btnCalculate = document.getElementById("btnCalculate");
 			
@@ -36,7 +38,6 @@
 			spanTax = document.getElementById("spanTax");
 
 			btnCalculate.addEventListener("click",onBtnCalculateClick);
-			rangeTax.addEventListener("change",onRangeTaxChange);
 		}
 		
 		function onTxtBasicChange(){
@@ -56,6 +57,10 @@
 
 		function updateSalary(){
 			divSalary.innerText = calculator.salary;
+		}
+
+		function notifySalaryChange(){
+			console.log("The salary has finally changed");
 		}
 
 		function onBtnCalculateClick(){
