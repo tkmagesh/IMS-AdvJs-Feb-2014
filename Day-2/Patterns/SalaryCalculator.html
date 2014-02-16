@@ -19,6 +19,7 @@
 			calculator = new SalaryCalculator();
 			//calculator.onSalaryChange = updateSalary;
 			calculator.addSubscriberForSalaryChange(updateSalary);
+			calculator.addSubscriberForSalaryChange(throwError);
 			calculator.addSubscriberForSalaryChange(notifySalaryChange);
 
 			btnCalculate = document.getElementById("btnCalculate");
@@ -57,6 +58,10 @@
 
 		function updateSalary(){
 			divSalary.innerText = calculator.salary;
+		}
+
+		function throwError(){
+			throw new Error("Some intentional error for demo");
 		}
 
 		function notifySalaryChange(){
