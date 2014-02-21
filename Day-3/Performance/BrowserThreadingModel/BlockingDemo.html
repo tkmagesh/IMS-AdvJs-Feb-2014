@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Blocking Demo</title>
+	<script>
+	(function(){
+		window.addEventListener("DOMContentLoaded",init);
+		function init(){
+			document.getElementById("btnDoWork").addEventListener("click",onBtnDoWorkClick);
+		}
+
+		function onBtnDoWorkClick(){
+			displayMessage("Work Started...");
+			setTimeout(function(){
+				doWork();
+				displayMessage("Work Completed...");
+			});	
+		}
+		function displayMessage(msg){
+			document.getElementById("divMessage").innerHTML += msg + "<br/>";
+
+		}
+		function doWork(){
+			for(var i=0;i<100000;i++)
+				for(var j=0;j<1000;j++)
+					for(var k=0;k<100;k++)
+					{}
+		}
+	})();
+
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="">
+	<input type="button" value="Do Work" id="btnDoWork">
+	<div id="divMessage"></div>
+</body>
+</html>

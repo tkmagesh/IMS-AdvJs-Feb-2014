@@ -18,8 +18,11 @@ function SalaryCalculator(){
 	}
 
 	SalaryCalculator.prototype.triggerSalaryChange = function(){
-		for(var i=0;i<this.subscribers.length;i++)
-			this.subscribers[i]();
+		for(var i=0;i<this.subscribers.length;i++){
+			setTimeout(function(){
+				this.subscribers[i]();
+			});
+		}
 	}
 
 	SalaryCalculator.prototype.onSalaryChange = function(){};
