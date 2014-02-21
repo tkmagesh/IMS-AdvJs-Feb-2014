@@ -42,17 +42,17 @@
 		}
 		
 		function onTxtBasicChange(){
-			calculator.basic = parseInt(this.value);
+			calculator.basic(parseInt(this.value));
 		}
 
 		function onTxtHraChange(){
-			calculator.hra = parseInt(this.value);
+			calculator.hra(parseInt(this.value));
 		}
 		function onTxtDaChange(){
-			calculator.da = parseInt(this.value);
+			calculator.da(parseInt(this.value));
 		}
 		function onRangeTaxChange(){
-			calculator.tax = parseInt(this.value);
+			calculator.tax(parseInt(this.value));
 			spanTax.innerText = "[" + rangeTax.value + "]";
 		}
 
