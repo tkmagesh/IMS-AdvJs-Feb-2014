@@ -13,16 +13,19 @@ function SalaryCalculator(){
 		this.triggerSalaryChange();
 	};
 
-	SalaryCalculator.prototype.addSubscriberForSalaryChange = function(callback){
+	SalaryCalculator.prototype.addChangeSubscriber = function(attrName,callback){
 		this.subscribers.push(callback);
 	}
 
-	SalaryCalculator.prototype.triggerSalaryChange = function(){
+	SalaryCalculator.prototype.triggerChange = function(attrName){
 		for(var i=0;i<this.subscribers.length;i++){
-			setTimeout(function(){
-				this.subscribers[i]();
-			});
+			var self = this;
+			setTimeout((function(index){
+				return function(){
+					self.subscribers[index]();
+				}
+			})(i));
 		}
 	}
 
-	SalaryCalculator.prototype.onSalaryChange = function(){};
+	//SalaryCalculator.prototype.onSalaryChange = function(){};
