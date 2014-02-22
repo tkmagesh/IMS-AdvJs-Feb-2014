@@ -22,8 +22,15 @@
 			$("#spanSelectedTask").text($(this).text());
 		});*/
 		//"on" version of the above is given below
-		$(document.body).on("click","li",function(){
+		$(document.body).on("click","li",function(e){
 			$("#spanSelectedTask").text($(this).text());
+			
+			e.preventDefault(); // for preventing the browser from executing its natural course of action
+		});
+		$("li").click(function(e){
+			console.log($(this).text() + " is clicked");
+			e.stopPropagation();
+			e.preventDefault();
 		});
 	});
 	</script>
@@ -31,11 +38,11 @@
 <body>
 	<input type="text" name="" id="txtTask"><input type="button" value="Add New" id="btnAddNew">
 	<ul id="ulTaskList">
-		<li>Task -1</li>
-		<li>Task -2</li>
-		<li>Task -3</li>
-		<li>Task -4</li>
-		<li>Task -5</li>
+		<li><a href="Task-1.html">Task-1</a></li>
+		<li><a href="Task-2.html">Task-2</a></li>
+		<li><a href="Task-3.html">Task-3</a></li>
+		<li><a href="Task-4.html">Task-4</a></li>
+		<li><a href="Task-5.html">Task-5</a></li>
 	</ul>
 	<div id="divMessage">
 		Selected Task : <span id="spanSelectedTask"></span>
