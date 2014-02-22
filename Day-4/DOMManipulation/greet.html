@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Greet</title>
+	<style>
+	.invalid{
+		border : 2px solid red;
+		background-color: lightpink;
+	}
+	.errorMessage{
+		display : none;
+	}
+	</style>
+	<script src="jquery.js"></script>
+	<script>
+	(function(window,document){
+		//window.addEventListener("DOMContentLoaded",init);
+		var txtFirstName, txtLastName, btnGreet,divMessage;
+		$(function init(){
+			txtFirstName = document.getElementById("txtFirstName");
+			txtLastName = document.getElementById("txtLastName");
+			btnGreet = document.getElementById("btnGreet");
+			divMessage = document.getElementById("divMessage");
+
+			btnGreet.addEventListener("click",onBtnGreetClick);
+		});
+		function onBtnGreetClick(){
+			var firstName = txtFirstName.value;
+			var lastName = txtLastName.value;
+			if (firstName === ''){
+				txtFirstName.classList.add("invalid");
+				txtFirstName.parentElement.querySelector("span.errorMessage").style.display = "inline";
+			} else {
+				txtFirstName.classList.remove("invalid");
+				txtFirstName.parentElement.querySelector("span.errorMessage").style.display = "none";
+			}
+
+			if (lastName === ''){
+				txtLastName.classList.add("invalid");
+				txtLastName.parentElement.querySelector("span.errorMessage").style.display = "inline";
+			} else {
+				txtLastName.classList.remove("invalid");
+				txtLastName.parentElement.querySelector("span.errorMessage").style.display = "none";
+				
+			}
+			if (firstName !== '' && lastName !== ''){
+				
+				var msg = "Hi " + txtFirstName.value + " " + txtLastName.value;
+				divMessage.innerHTML = msg;
+			}
+		}
+	})(window,document)
+	</script>
+
+</head>
+<body>
+	<div>
+		First Name : <input type="text" name="" id="txtFirstName"> <span class="errorMessage">First Name is mandatory</span>
+	</div>
+	<div>
+		Last Name : <input type="text" name="" id="txtLastName"> <span class="errorMessage">Last Name is mandatory</span>
+	</div>
+	<div>
+		<input type="button" value="Greet" id="btnGreet">
+	</div>
+	<div id="divMessage">
+		
+	</div>
+</body>
+</html>

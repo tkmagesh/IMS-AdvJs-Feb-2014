@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Events Demo</title>
+	<script src="jquery.js"></script>
+	<script>
+	$(function(){
+		/*$("#btnAddNew").click(function(){
+			$("<li>").text($("#txtTask").val()).appendTo("#ulTaskList")	
+		});*/
+		//"on" version of the above is given below
+		$("#btnAddNew").on('click',function(){
+			$("<li>").text($("#txtTask").val()).appendTo("#ulTaskList")	
+		});
+
+		/*$("#ulTaskList > li").click(function(){
+			$("#spanSelectedTask").text($(this).text());
+		});*/
+
+		/*$("#ulTaskList").delegate("li","click",function(){
+			$("#spanSelectedTask").text($(this).text());
+		});*/
+		//"on" version of the above is given below
+		$(document.body).on("click","li",function(){
+			$("#spanSelectedTask").text($(this).text());
+		});
+	});
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="txtTask"><input type="button" value="Add New" id="btnAddNew">
+	<ul id="ulTaskList">
+		<li>Task -1</li>
+		<li>Task -2</li>
+		<li>Task -3</li>
+		<li>Task -4</li>
+		<li>Task -5</li>
+	</ul>
+	<div id="divMessage">
+		Selected Task : <span id="spanSelectedTask"></span>
+	</div>
+</body>
+</html>

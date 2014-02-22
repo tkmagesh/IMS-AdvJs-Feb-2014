@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Greet</title>
+	<style>
+	.invalid{
+		border : 2px solid red;
+		background-color: lightpink;
+	}
+	.errorMessage{
+		display : none;
+	}
+	</style>
+	<script src="jquery.js"></script>
+	<script>
+	$.fn.extend({
+		validateRequired : function(){
+			return this.each(function(){
+				var $this = $(this);
+				var value = $this.val();
+				if (value === ''){
+					$this.addClass("invalid").siblings("span.errorMessage").show();
+				} else {
+					$this.removeClass("invalid").siblings("span.errorMessage").hide();
+				}
+			});
+		}
+	});
+	(function(window,document){
+		$(function init(){
+			$("#btnGreet").bind('click',onBtnGreetClick);
+		});
+
+		function onBtnGreetClick(){
+			$(":text").validateRequired();
+			var firstName = $("#txtFirstName").val(),
+				lastName = $("#txtLastName").val()
+			if (firstName !== '' && lastName !== ''){
+				var msg = "Hi " +  firstName + " " + lastName;
+				$divMessage.html(msg);
+			}
+		}
+	})(window,document)
+	</script>
+
+</head>
+<body>
+	<div>
+		First Name : <input type="text" name="" id="txtFirstName"> <span class="errorMessage">First Name is mandatory</span>
+	</div>
+	<div>
+		Middle Name : <input type="text" name="" id="txtMiddleName"> <span class="errorMessage">Middle Name is mandatory</span>
+	</div>
+	<div>
+		Last Name : <input type="text" name="" id="txtLastName"> <span class="errorMessage">Last Name is mandatory</span>
+	</div>
+	<div>
+		<input type="button" value="Greet" id="btnGreet">
+	</div>
+	<div id="divMessage">
+		
+	</div>
+</body>
+</html>
