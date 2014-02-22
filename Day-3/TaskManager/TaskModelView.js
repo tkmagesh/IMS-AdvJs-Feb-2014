@@ -9,7 +9,7 @@ function TaskView(task,$){
 		});
 
 		//Model Events
-		task.addSubscriber('isCompleted',function(task){
+		task.addSubscriber('isCompleted',function(){
 			if (task.isCompleted()){
 				self.$root.addClass("completed");
 			} else {
