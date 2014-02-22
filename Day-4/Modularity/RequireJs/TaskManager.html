@@ -27,19 +27,8 @@
 		</div>
 		
 	</script>
-	<script src="jquery.js"></script>
-	<script src="TaskModel.js"></script>
-	<script src="TaskModelView.js"></script>
-	<script src="TaskCollection.js"></script>
-	<script src="TaskCollectionView.js"></script>
-	<script>
-	$(function(){
-		window.tasks = new TaskCollection();
-		window.tasksView = new TaskCollectionView(tasks,"#appTemplate",$);
-		tasksView.init();
-		$(document.body).append(tasksView.$root);
-	})
-	</script>
+	<script src="scripts/lib/require.js" data-main="scripts/app.js"></script>
+
 </head>
 <body>
 	
