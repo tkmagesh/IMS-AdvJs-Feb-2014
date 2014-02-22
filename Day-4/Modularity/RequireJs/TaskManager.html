@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task Manager</title>
+	<style>
+	.completed {
+		color : red;
+		font-style: italic;
+		text-decoration: line-through;
+	}
+	</style>
+	<script type="text/template" id="appTemplate">
+		<div>
+			<h1>Task Manager</h1>
+		<span>Task :</span>
+		<input type="text" name="" id="txtTask">
+		<input type="button" value="Add Task" id="btnAdd">
+		<input type="button" value="Remove Completed" id="btnRemoveCompleted">		
+		<ul id="ulTaskList"></ul>	
+		<div>
+			<span id="spanCompletedCount">Completed #: 0</span>
+		</div>
+		<div>
+			<span id="spanInCompleteCount">InComplete #: 0</span>
+		</div>
+		</div>
+		
+	</script>
+	<script src="jquery.js"></script>
+	<script src="TaskModel.js"></script>
+	<script src="TaskModelView.js"></script>
+	<script src="TaskCollection.js"></script>
+	<script src="TaskCollectionView.js"></script>
+	<script>
+	$(function(){
+		window.tasks = new TaskCollection();
+		window.tasksView = new TaskCollectionView(tasks,"#appTemplate",$);
+		tasksView.init();
+		$(document.body).append(tasksView.$root);
+	})
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
