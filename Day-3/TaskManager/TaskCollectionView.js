@@ -17,5 +17,5 @@ function TaskCollectionView(tasks,templateId,$){
 			taskModelView.init();
 			self.$root.find("#ulTaskList").append(taskModelView.$root);
 		});
-	}
+	};
 }
