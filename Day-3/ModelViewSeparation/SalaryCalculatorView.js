@@ -4,9 +4,13 @@ function SalaryCalculatorView(calculator,template){
 		var self = this;	
 		this.init = function(){
 				
-			calculator.addChangeSubscriber("basic",function(){
+			/*calculator.addChangeSubscriber("basic",function(){
 				self.$root.find("#txtBasic").val(calculator.basic());
-			});
+			});*/
+			var callBackBoundToTHIS = $.proxy(function(){
+				this.$root.find("#txtBasic").val(calculator.basic());
+			},this);
+			calculator.addChangeSubscriber("basic",callBackBoundToTHIS);
 
 			calculator.addChangeSubscriber("hra",function(){
 				self.$root.find("#txtHra").val(calculator.hra());

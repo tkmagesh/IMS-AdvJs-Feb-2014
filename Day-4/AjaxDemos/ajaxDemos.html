@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax Demos</title>
+	<script src="jquery.js"></script>
+	<script src="handlebars-v1.3.0.js"></script>
+	<script id="products-table-template" type="text/x-handlebars-template">
+  	<table>
+  	{{#each products}}
+  		<tr>
+  			<td>{{id}}</td>
+  			<td>{{name}}</td>
+  			<td>{{cost}}</td>
+  			<td>{{units}}</td>
+  			<td>{{category}}</td>
+  		</tr>
+  	{{/each}}
+  	</table>
+	</script>
+	<script>
+	$(function(){
+		$("#btnGetRemoteHTML").click(function(){
+			var remoteEndPoint = "remoteHTMLFragment.html";
+			/*
+			$.get(remoteEndPoint,function(res){
+				console.log(res);
+				$("#divResult").html(res);
+			},"html"); //possible values to represent th data type are "json","html","text","script"
+			*/
+			$("#divResult").load(remoteEndPoint);
+		});
+
+		var deferred ;
+		$("#btnDisplayData").click(function(){
+			deferred.then(function(products){
+					renderProductsUsingTemplates(products);
+			});
+		})
+		
+
+		$("#btnGetJSONData").click(function(){
+			var remoteEndPoint = "products.json";
+			/*
+			$.get(remoteEndPoint,function(products){
+				var html = "<table>";
+				products.forEach(function(p){
+					html += "<tr><td>" + p.id + "</td><td>" + p.name + "</td><td>" + p.cost + "</td></tr>";
+				});
+				html += "</table>"
+				$("#divResult").html(html);
+			},"json")
+			*/
+			
+			//accomplishing the above using $.ajax
+			/*
+			$.ajax({
+				url : remoteEndPoint,
+				type : "get",
+				dataType : "json",
+				contentType : "application/json",
+				data : '{}',
+				success : function(products){
+					renderProductsUsingTemplates(products);
+				}
+			});
+			*/
+			//Ajax using Deferred objects(aka promises)
+			deferred = $.ajax({
+				url : remoteEndPoint,
+				type : "get",
+				dataType : "json",
+				contentType : "application/json",
+				data : '{}'
+			});
+			
+			
+		});
+		function renderProducts(products){
+			var html = "<table>";
+			products.forEach(function(p){
+				html += "<tr><td>" + p.id + "</td><td>" + p.name + "</td><td>" + p.cost + "</td></tr>";
+			});
+			html += "</table>"
+			$("#divResult").html(html);
+		}
+		function renderProductsUsingTemplates(prods){
+			var templateId = "#products-table-template";
+			var data = {
+				products : prods
+			};
+			var source   = $(templateId).html();
+			var template = Handlebars.compile(source);
+
+			$("#divResult").html(template(data));
+		}
+	})
+	</script>
+</head>
+<body>
+	<div><input type="button" value="Get Remote Html" id="btnGetRemoteHTML"></div>
+	<div><input type="button" value="Get JSON Data" id="btnGetJSONData"></div>
+	<div><input type="button" value="Display Data" id="btnDisplayData"></div>
+	<div id="divResult"></div>
+</body>
+</html>
